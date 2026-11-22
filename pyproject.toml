@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "neuromorphic-snn-stdp-engine"
+version = "0.1.0"
+description = "Neuromorphic Spiking Neural Network simulation engine with LIF, Izhikevich dynamics, and STDP synaptic plasticity"
+readme = "README.md"
+authors = [{ name = "Lakshitha Dananjaya", email = "dananjayarox01@gmail.com" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.0.0",
+    "click>=8.1.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.3.0",
+]
+
+[project.scripts]
+snn-engine = "neuromorphic_snn_stdp.cli:cli"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=neuromorphic_snn_stdp --cov-report=term-missing"
+
+[tool.hatch.build.targets.wheel]
+packages = ["neuromorphic_snn_stdp"]
